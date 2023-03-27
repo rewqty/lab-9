@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${appName}" style="color: green">Add product</h1>
+    <hr/>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <form th:action="${'/list'}" th:method="post">
+                    <input type="text" name="name">
+                    <input class="btn btn-primary" type="submit" value="Добавить" >
+                    <button onclick="location.href='/list'" type="button">Назад к списку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

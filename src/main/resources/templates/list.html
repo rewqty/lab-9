@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<h1 th:text="${appName}" style="color: green">Shopping List</h1>
+
+<div class="container">
+    <h1 th:text="${appName}" style="color: green">Shopping List</h1>
+    <hr/>
+    <form action="/list/new" method="GET">
+        <input type="submit" value="Добавить новый"/>
+    </form>
+    <hr/>
+    <div class="content">
+        <div th:if="${products.empty}" class="col-md-11 description">
+            <p class="description-text">Список пуст</p>
+        </div>
+        <div class="row article" th:each="product : ${products}">
+            <div class="col-md-11 description">
+                <p class="description-text" th:text="${product.name}">Text</p>
+            </div>
+            <div class="col-md-11 description">
+                <p class="description-text" th:switch="${product.isPurchased}">
+                    <span th:case="${true}"> Куплен </span>
+                    <span th:case="${false}"> Не куплен </span>
+                </p>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                    <form th:action="${'/list/'+product.id+'/purchase'}" th:method="post" th:switch="${product.isPurchased}">
+                        <input class="btn btn-secondary" th:case="${false}" type="submit" value="Купить">
+                        <input class="btn btn-secondary" th:case="${true}" type="submit" value="Отменить покупку">
+                    </form>
+                    <form th:action="${'/list/'+product.id}" th:method="get">
+                        <input class="btn btn-secondary" type="submit" value="Открыть">
+                    </form>
+                    <form th:action="${'/list/'+product.id+'/delete'}" th:method="post">
+                        <input class="btn btn-secondary" type="submit" value="Удалить">
+                    </form>
+            </div>
+            <div class="col-md-12">
+                <hr/>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
